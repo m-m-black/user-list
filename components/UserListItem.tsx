@@ -1,5 +1,12 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, useColorScheme } from "react-native";
 import { ListItem, Avatar } from "@rneui/themed";
+
+import {
+  Colors,
+  avatarBackground,
+  avatarText,
+  avatarSubtitleText,
+} from "@/constants/Colors";
 
 type UserListItemProps = {
   name: string;
@@ -7,11 +14,24 @@ type UserListItemProps = {
 };
 
 export default function UserListItem({ name, role }: UserListItemProps) {
+  const theme = useColorScheme() ?? "light";
+
   const avatarLabel = name[0].toUpperCase();
 
+  // Custom styles based on device theme (light or dark)
+  const themedStyles = {
+    container: {
+      backgroundColor:
+        theme === "light" ? Colors.light.background : Colors.dark.background,
+    },
+    titleText: {
+      color: theme === "light" ? Colors.light.text : Colors.dark.text,
+    },
+  };
+
   return (
-    <View style={styles.container}>
-      <ListItem>
+    <View>
+      <ListItem containerStyle={themedStyles.container}>
         <Avatar
           size={40}
           title={avatarLabel}
@@ -19,7 +39,7 @@ export default function UserListItem({ name, role }: UserListItemProps) {
           titleStyle={styles.avatarText}
         />
         <ListItem.Content>
-          <ListItem.Title>{name}</ListItem.Title>
+          <ListItem.Title style={themedStyles.titleText}>{name}</ListItem.Title>
           <ListItem.Subtitle style={styles.subtitleText}>
             {role}
           </ListItem.Subtitle>
@@ -30,17 +50,14 @@ export default function UserListItem({ name, role }: UserListItemProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "linen",
-  },
   avatarContainer: {
-    backgroundColor: "#EAF2FA",
+    backgroundColor: avatarBackground,
     borderRadius: 5,
   },
   avatarText: {
-    color: "#306FC7",
+    color: avatarText,
   },
   subtitleText: {
-    color: "grey",
+    color: avatarSubtitleText,
   },
 });

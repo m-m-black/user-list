@@ -1,7 +1,8 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, useColorScheme } from "react-native";
 import { CheckBox } from "@rneui/themed";
 
 import { UserRole } from "@/constants/UserRole";
+import { Colors } from "@/constants/Colors";
 
 type UserTypeFilterProps = {
   selectedRole: UserRole | undefined;
@@ -12,12 +13,38 @@ export default function UserTypeFilter({
   selectedRole,
   setSelectedRole,
 }: UserTypeFilterProps) {
+  const theme = useColorScheme() ?? "light";
+
+  // This function allows each filter button to be selected and unselected
   const toggleFilter = (role: UserRole) => {
     if (selectedRole === role) {
       setSelectedRole(undefined);
     } else {
       setSelectedRole(role);
     }
+  };
+
+  // Custom styles based on device theme (light or dark)
+  const themedStyles = {
+    checkedColor: {
+      color:
+        theme === "light"
+          ? Colors.light.tabIconSelected
+          : Colors.dark.tabIconSelected,
+    },
+    container: {
+      backgroundColor:
+        theme === "light" ? Colors.light.background : Colors.dark.background,
+    },
+    selectedContainer: {
+      backgroundColor:
+        theme === "light"
+          ? Colors.light.backgroundSecondary
+          : Colors.dark.backgroundSecondary,
+    },
+    text: {
+      color: theme === "light" ? Colors.light.text : Colors.dark.text,
+    },
   };
 
   return (
@@ -30,9 +57,11 @@ export default function UserTypeFilter({
         title="Admin"
         containerStyle={[
           styles.container,
-          selectedRole === UserRole.ADMIN && styles.containerSelected,
+          themedStyles.container,
+          selectedRole === UserRole.ADMIN && themedStyles.selectedContainer,
         ]}
-        checkedColor="#306FC7"
+        textStyle={themedStyles.text}
+        checkedColor={themedStyles.checkedColor.color}
       />
       <CheckBox
         checked={selectedRole === UserRole.MANAGER}
@@ -42,9 +71,11 @@ export default function UserTypeFilter({
         title="Manager"
         containerStyle={[
           styles.container,
-          selectedRole === UserRole.MANAGER && styles.containerSelected,
+          themedStyles.container,
+          selectedRole === UserRole.MANAGER && themedStyles.selectedContainer,
         ]}
-        checkedColor="#306FC7"
+        textStyle={themedStyles.text}
+        checkedColor={themedStyles.checkedColor.color}
       />
     </View>
   );
@@ -53,8 +84,5 @@ export default function UserTypeFilter({
 const styles = StyleSheet.create({
   container: {
     borderRadius: 10,
-  },
-  containerSelected: {
-    backgroundColor: "#EAF2FA",
   },
 });

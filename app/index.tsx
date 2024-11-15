@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 import {
@@ -15,6 +15,7 @@ import UserList from "@/components/UserList";
 
 import { UserRole } from "@/constants/UserRole";
 import { AWS_APPSYNC_URL, AWS_APPSYNC_API_KEY } from "@/constants/aws-config";
+import { Colors } from "@/constants/Colors";
 
 // Create HTTP link to AppSync URL
 const httpLink = new HttpLink({
@@ -40,24 +41,42 @@ export default function HomeScreen() {
   const [selectedRole, setSelectedRole] = useState<UserRole | undefined>(
     undefined
   );
+  const theme = useColorScheme() ?? "light";
+
+  // Custom styles based on device theme (light or dark)
+  const themedStyles = {
+    sectionTitleText: {
+      color: theme === "light" ? Colors.light.text : Colors.dark.text,
+    },
+  };
 
   return (
     <ApolloProvider client={client}>
-      <SafeAreaView style={styles.container}>
-        <Divider style={{ margin: 20 }} />
-        <Text h3 style={styles.sectionTitle}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          {
+            backgroundColor:
+              theme === "light"
+                ? Colors.light.background
+                : Colors.dark.background,
+          },
+        ]}
+      >
+        <Divider style={styles.divider} />
+        <Text h3 style={[styles.sectionTitle, themedStyles.sectionTitleText]}>
           User Types
         </Text>
         <UserTypeFilter
           selectedRole={selectedRole}
           setSelectedRole={setSelectedRole}
         />
-        <Divider style={{ margin: 20 }} />
-        <Text h3 style={styles.sectionTitle}>
+        <Divider style={styles.divider} />
+        <Text h3 style={[styles.sectionTitle, themedStyles.sectionTitleText]}>
           All Users
         </Text>
         <UserList selectedRole={selectedRole} />
-        <Divider style={{ margin: 20 }} />
+        <Divider style={styles.divider} />
       </SafeAreaView>
     </ApolloProvider>
   );
@@ -66,9 +85,11 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
   },
   sectionTitle: {
     paddingLeft: 15,
+  },
+  divider: {
+    margin: 20,
   },
 });

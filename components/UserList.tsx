@@ -1,37 +1,10 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, useColorScheme } from "react-native";
 import { gql, useQuery } from "@apollo/client";
 
 import UserListItem from "./UserListItem";
 
 import { UserRole } from "@/constants/UserRole";
-
-// TODO: Delete this
-const testCustomers = [
-  {
-    id: "1",
-    name: "TestCustomer1",
-    email: "test1@test.com",
-    role: "Manager",
-  },
-  {
-    id: "2",
-    name: "TestCustomer2",
-    email: "test2@test.com",
-    role: "Admin",
-  },
-  {
-    id: "3",
-    name: "TestCustomer3",
-    email: "test3@test.com",
-    role: "Manager",
-  },
-  {
-    id: "4",
-    name: "TestCustomer4",
-    email: "test4@test.com",
-    role: "Admin",
-  },
-];
+import { Colors } from "@/constants/Colors";
 
 // Export this query to make it available it tests
 export const LIST_ZELLER_CUSTOMERS = gql`
@@ -57,6 +30,8 @@ type UserListProps = {
 };
 
 export default function UserList({ selectedRole }: UserListProps) {
+  const theme = useColorScheme() ?? "light";
+
   // Set query filter based on selectedRole
   const roleFilter = selectedRole ? { role: { eq: selectedRole } } : null;
 
@@ -65,11 +40,18 @@ export default function UserList({ selectedRole }: UserListProps) {
     variables: { filter: roleFilter, limit: 10 },
   });
 
+  // Custom styles based on device theme (light or dark)
+  const themedStyles = {
+    statusText: {
+      color: theme === "light" ? Colors.light.text : Colors.dark.text,
+    },
+  };
+
   if (loading) {
     return (
       <View style={styles.container}>
         <View style={styles.statusContainer}>
-          <Text>Loading...</Text>
+          <Text style={themedStyles.statusText}>Loading...</Text>
         </View>
       </View>
     );
@@ -79,7 +61,7 @@ export default function UserList({ selectedRole }: UserListProps) {
     return (
       <View style={styles.container}>
         <View style={styles.statusContainer}>
-          <Text>Error: {error.message}</Text>
+          <Text style={themedStyles.statusText}>Error: {error.message}</Text>
         </View>
       </View>
     );
@@ -88,7 +70,6 @@ export default function UserList({ selectedRole }: UserListProps) {
   return (
     <View style={styles.container}>
       <FlatList
-        // data={testCustomers} // TODO: Delete this
         data={data.listZellerCustomers.items}
         contentContainerStyle={styles.listContainer}
         renderItem={({ item, index }) => (
