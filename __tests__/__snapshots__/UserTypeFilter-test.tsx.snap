@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserTypeFilter it renders correctly 1`] = `
+<View>
+  <View
+    checked={true}
+    checkedColor="#306FC7"
+    checkedIcon="dot-circle-o"
+    containerStyle={
+      [
+        {
+          "borderRadius": 10,
+        },
+        {
+          "backgroundColor": "#EAF2FA",
+        },
+      ]
+    }
+    onPress={[Function]}
+    title="Admin"
+    uncheckedIcon="circle-o"
+  >
+    <Text>
+      ⚫
+       
+      Admin
+    </Text>
+  </View>
+  <View
+    checked={false}
+    checkedColor="#306FC7"
+    checkedIcon="dot-circle-o"
+    containerStyle={
+      [
+        {
+          "borderRadius": 10,
+        },
+        false,
+      ]
+    }
+    onPress={[Function]}
+    title="Manager"
+    uncheckedIcon="circle-o"
+  >
+    <Text>
+      ◯
+       
+      Manager
+    </Text>
+  </View>
+</View>
+`;
