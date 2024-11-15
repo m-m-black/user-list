@@ -31,6 +31,16 @@ Tests are located in the [`__tests__`] directory at the root of the application.
 
 GraphQL config and querying is handled with an [Apollo](https://www.apollographql.com/docs/react/integrations/react-native) client.
 
+As the app was created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app), some of the code is auto-generated. The following files were created and written by me:
+[`__mocks__/*`]
+[`__tests__/*`]
+[`app/*`]
+[`components/UserList.tsx`]
+[`components/UserListItem.tsx`]
+[`components/UserTypeFilter.tsx`]
+[`constants/aws-config.ts`]
+[`constants/UserRole.ts`]
+
 ## Run tests
 
 ```bash
