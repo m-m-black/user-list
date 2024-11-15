@@ -37,11 +37,12 @@ const client = new ApolloClient({
 });
 
 export default function HomeScreen() {
+  const theme = useColorScheme() ?? "light";
+
   // Define selectedRole here because it is passed down to two child components
   const [selectedRole, setSelectedRole] = useState<UserRole | undefined>(
     undefined
   );
-  const theme = useColorScheme() ?? "light";
 
   // Custom styles based on device theme (light or dark)
   const themedStyles = {
