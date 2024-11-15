@@ -47,3 +47,13 @@ As the app was created with [`create-expo-app`](https://www.npmjs.com/package/cr
 - [`components/UserTypeFilter.tsx`]
 - [`constants/aws-config.ts`]
 - [`constants/UserRole.ts`]
+
+## App screenshots
+
+No filter applied
+
+<img src="assets/images/screenshots/ios-screenshot-1.png" alt="Screenshot of app with no filter applied" width="300"/>
+
+Filtered to Admin users
+
+<img src="assets/images/screenshots/ios-screenshot-2.png" alt="Screenshot of app with Admin filter applied" width="300"/>
