@@ -136,10 +136,10 @@ describe("UserList", () => {
     expect(getByText("TestCustomer3")).toBeTruthy();
     expect(getByText("TestCustomer4")).toBeTruthy();
 
-    // Click Admin radio button
     const adminButton = getByText("◯ Admin");
 
     act(() => {
+      // Click Admin radio button
       fireEvent.press(adminButton);
     });
 
@@ -169,10 +169,10 @@ describe("UserList", () => {
       expect(queryByText("Loading...")).toBeNull();
     });
 
-    // Click Manager radio button
     const managerButton = getByText("◯ Manager");
 
     act(() => {
+      // Click Manager radio button
       fireEvent.press(managerButton);
     });
 
@@ -205,10 +205,10 @@ describe("UserList", () => {
     expect(queryByText("TestCustomer3")).toBeNull(); // Manager
     expect(getByText("TestCustomer4")).toBeTruthy(); // Admin
 
-    // Click Admin radio button again to clear
     const adminButton = getByText("⚫ Admin");
 
     act(() => {
+      // Click Admin radio button again to clear
       fireEvent.press(adminButton);
     });
 

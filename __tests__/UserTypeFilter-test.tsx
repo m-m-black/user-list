@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, act } from "@testing-library/react-native";
 
 import UserTypeFilter from "@/components/UserTypeFilter";
 
@@ -40,6 +40,7 @@ describe("UserTypeFilter", () => {
     );
 
     const adminButton = getByText("◯ Admin");
+    // Click Admin radio button
     fireEvent.press(adminButton);
 
     expect(mockSetSelectedRole).toHaveBeenCalledWith(UserRole.ADMIN);
@@ -56,6 +57,7 @@ describe("UserTypeFilter", () => {
     );
 
     const adminButton = getByText("⚫ Admin");
+    // Click Admin radio button
     fireEvent.press(adminButton);
 
     expect(mockSetSelectedRole).toHaveBeenCalledWith(undefined);
