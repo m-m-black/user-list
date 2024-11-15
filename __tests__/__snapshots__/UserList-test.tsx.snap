@@ -13,11 +13,19 @@ exports[`UserList it renders correctly 1`] = `
             "borderRadius": 10,
           },
           {
+            "backgroundColor": "#fff",
+          },
+          {
             "backgroundColor": "#EAF2FA",
           },
         ]
       }
       onPress={[Function]}
+      textStyle={
+        {
+          "color": "#11181C",
+        }
+      }
       title="Admin"
       uncheckedIcon="circle-o"
     >
@@ -36,10 +44,18 @@ exports[`UserList it renders correctly 1`] = `
           {
             "borderRadius": 10,
           },
+          {
+            "backgroundColor": "#fff",
+          },
           false,
         ]
       }
       onPress={[Function]}
+      textStyle={
+        {
+          "color": "#11181C",
+        }
+      }
       title="Manager"
       uncheckedIcon="circle-o"
     >
@@ -66,7 +82,13 @@ exports[`UserList it renders correctly 1`] = `
         }
       }
     >
-      <Text>
+      <Text
+        style={
+          {
+            "color": "#11181C",
+          }
+        }
+      >
         Loading...
       </Text>
     </View>
