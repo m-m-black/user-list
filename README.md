@@ -16,6 +16,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
+   This will prompt you to select the simulator or environment you wish to run the app in.
+
 ## Run tests
 
 ```bash
